@@ -9,24 +9,24 @@
       "name": "Debug Local File",
       "type": "Ruby",
       "request": "launch",
-      "cwd": "${workspaceRoot}",
-      "program": "${workspaceRoot}/main.rb"
+      "cwd": "${workspaceRoot}/sakurasaku_market",
+      "program": "${workspaceRoot}/sakurasaku_market/main.rb"
     },
     {
       "name": "Listen for rdebug-ide",
       "type": "Ruby",
       "request": "attach",
-      "cwd": "${workspaceRoot}",
+      "cwd": "${workspaceRoot}/sakurasaku_market",
       "remoteHost": "127.0.0.1",
       "remotePort": "1234",
-      "remoteWorkspaceRoot": "${workspaceRoot}"
+      "remoteWorkspaceRoot": "${workspaceRoot}/sakurasaku_market"
     },
     {
       "name": "Rails server",
       "type": "Ruby",
       "request": "launch",
-      "cwd": "${workspaceRoot}",
-      "program": "${workspaceRoot}/bin/rails",
+      "cwd": "${workspaceRoot}/sakurasaku_market",
+      "program": "${workspaceRoot}/sakurasaku_market/bin/rails",
       "args": [
         "server"
       ]
@@ -35,22 +35,22 @@
       "name": "RSpec - all",
       "type": "Ruby",
       "request": "launch",
-      "cwd": "${workspaceRoot}",
-      "program": "${workspaceRoot}/bin/rspec",
+      "cwd": "${workspaceRoot}/sakurasaku_market",
+      "program": "${workspaceRoot}/sakurasaku_market/bin/rspec",
       "args": [
         "-I",
-        "${workspaceRoot}"
+        "${workspaceRoot}/sakurasaku_market"
       ]
     },
     {
       "name": "RSpec - active spec file only",
       "type": "Ruby",
       "request": "launch",
-      "cwd": "${workspaceRoot}",
-      "program": "${workspaceRoot}/bin/rspec",
+      "cwd": "${workspaceRoot}/sakurasaku_market",
+      "program": "${workspaceRoot}/sakurasaku_market/bin/rspec",
       "args": [
         "-I",
-        "${workspaceRoot}",
+        "${workspaceRoot}/sakurasaku_market",
         "${file}"
       ]
     },
@@ -58,8 +58,8 @@
       "name": "Cucumber",
       "type": "Ruby",
       "request": "launch",
-      "cwd": "${workspaceRoot}",
-      "program": "${workspaceRoot}/bin/cucumber"
+      "cwd": "${workspaceRoot}/sakurasaku_market",
+      "program": "${workspaceRoot}/sakurasaku_market/bin/cucumber"
     }
   ]
 }
