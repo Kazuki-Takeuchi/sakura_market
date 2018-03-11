@@ -1,0 +1,23 @@
+%p
+  %b 商品名:
+  = @commodity.name
+%p
+  %b 商品画像:
+  = attachment_image_tag @commodity, :file, :fill, 200, 150, format: 'jpeg'
+%p
+  %b 商品画像:
+  = @commodity.price
+%p
+  %b 商品説明:
+  = @commodity.caption
+- if is_admin?
+  %p
+    %b 表示フラグ:
+    = @commodity.display_flag
+  %p
+    %b 表示順:
+    = @commodity.display_index
+
+  = link_to '編集', edit_commodity_path(@commodity)
+  \|
+= link_to '戻る', commodities_path

@@ -16,13 +16,13 @@
         %span.login
           - if user_signed_in? 
             = link_to 'ログアウト', destroy_user_session_path, method: :delete
+            - if current_user.administrator?
+              |
+              = link_to 'ユーザ管理', "admin/user"
           - else
             = link_to 'ユーザ登録', new_user_registration_path
             |
             = link_to 'ログイン', new_user_session_path
-          - if current_user && current_user.administrator?
-            |
-            = link_to 'ユーザ管理', "admin/user"
     %div{id: "main"}
       %p{class: "notice"}
         = notice

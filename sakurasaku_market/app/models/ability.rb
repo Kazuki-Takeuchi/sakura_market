@@ -5,8 +5,8 @@ class Ability
     if user && user.administrator?
       can :access, :rails_admin
       can :manage, :all
+    else
+      can %i(read), Commodity
     end
-
-    can :index, "home"
   end
 end

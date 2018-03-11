@@ -1,0 +1,31 @@
+= form_for @commodity do |f|
+  - if @commodity.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@commodity.errors.count, "error")} prohibited this commodity from being saved:"
+      %ul
+        - @commodity.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label "商品名"
+    = f.text_field :name
+  .field
+    = f.label "商品画像"
+    = f.attachment_field :file
+  - if @commodity.file
+    = f.label "現在画像"
+    = attachment_image_tag @commodity, :file, :fill, 200, 150, format: 'jpeg'
+  .field
+    = f.label "商品画像"
+    = f.number_field :price
+  .field
+    = f.label "商品説明"
+    = f.text_area :caption
+  .field
+    = f.label "表示フラグ"
+    = f.check_box :display_flag
+  .field
+    = f.label "表示順"
+    = f.number_field :display_index
+  .actions
+    = f.submit '保存'
