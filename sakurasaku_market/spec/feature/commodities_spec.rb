@@ -55,7 +55,7 @@ feature '商品画面' do
 
     expect(has_link?('いちご')).to be true
     expect(has_link?('さくらんぼ')).to be true
-    expect(has_link?('パイナップル')).to be false
+    expect(has_no_link?('パイナップル')).to be true
 
     ichigo = Commodity.find_by(name: 'いちご')
     within '.commodity' + ichigo.id.to_s do
@@ -81,7 +81,7 @@ feature '商品画面' do
 
     expect(has_link?('いちご')).to be true
     expect(has_link?('さくらんぼ')).to be true
-    expect(has_link?('パイナップル')).to be false
+    expect(has_no_link?('パイナップル')).to be true
 
     #save_and_open_page
     sakuranbo = Commodity.find_by(name: 'さくらんぼ')
