@@ -12,7 +12,12 @@
         %span.title さくらさくマーケット
         = link_to '日記を見る', root_path
         = link_to 'お買い物', root_path
-        = link_to 'ショッピングカート', root_path
+        - if current_user && current_user.shopping_cart && current_user.shopping_cart.id
+          = link_to 'ショッピングカート', edit_user_shopping_cart_path(current_user, current_user.shopping_cart)
+        - elsif current_user
+          = link_to 'ショッピングカート', new_user_shopping_cart_path(current_user)
+        - else
+          = link_to 'ショッピングカート', root_path
         %span.login
           - if user_signed_in? 
             = link_to 'ログアウト', destroy_user_session_path, method: :delete
