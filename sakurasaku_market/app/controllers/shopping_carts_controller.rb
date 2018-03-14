@@ -36,7 +36,6 @@ class ShoppingCartsController < ApplicationController
       @shopping_cart = current_user.shopping_cart
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def shopping_cart_params
       params.require(:shopping_cart).permit(:payment_method_type, :delivery_date, :delivery_period_type)
     end

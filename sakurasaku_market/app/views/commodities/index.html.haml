@@ -1,7 +1,7 @@
 %ul.commodity_index
   - @commodities.sort {|a, b| a.display_index <=> b.display_index }.each do |commodity|
     - if commodity.display_flag
-      %li{class: "commodity" + commodity.id.to_s}
+      %li{class: "commodity_#{commodity.id}"}
         - if commodity.file
           = attachment_image_tag commodity, :file, :fill, 200, 150, format: 'jpeg'
         - else

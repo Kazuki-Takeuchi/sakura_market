@@ -20,3 +20,21 @@
     = f.select :delivery_period_type, ShoppingCart.delivery_period_types.keys
   .actions
     = f.submit 'カート情報の保存'
+
+%ul.shopping_cart_item_index
+  - @shopping_cart.shopping_cart_items.each do |shopping_cart_item|
+    - commodity = shopping_cart_item.commodity
+    %li{class: "shopping_cart_item_#{shopping_cart_item.id}"}
+      %p
+        商品名:
+        = link_to commodity.name, commodity
+        - if commodity.file
+          = attachment_image_tag commodity, :file, :fill, 100, 75, format: 'jpeg'
+        - else
+          = image_tag '', size: '100x75'
+      %p
+        価格:
+        =  "#{commodity.price}円"
+      = link_to 'カートから削除する', user_commodity_shopping_cart_item_path(current_user, commodity), method: :delete, data: { confirm: 'Are you sure?' }
+
+%br

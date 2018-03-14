@@ -6,10 +6,11 @@
   = attachment_image_tag @commodity, :file, :fill, 200, 150, format: 'jpeg'
 %p
   %b 価格:
-  = @commodity.price
+  = "#{@commodity.price}円"
 %p
   %b 商品説明:
   = @commodity.caption
+
 - if is_admin?
   %p
     %b 表示フラグ:
@@ -20,4 +21,6 @@
 
   = link_to '編集', edit_commodity_path(@commodity)
   \|
+= link_to 'カートに追加する', user_commodity_shopping_cart_items_path(current_user, @commodity), method: :post
+\|
 = link_to '戻る', commodities_path
