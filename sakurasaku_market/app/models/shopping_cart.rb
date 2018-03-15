@@ -25,7 +25,8 @@ class ShoppingCart < ApplicationRecord
 
   def check_delivery_date
     unless self.get_delivery_date_list.include?(self.delivery_date.to_date)
-      errors.add(:delivery_date, "は 3営業日（営業日: 月-金）から14営業日までです。")    end
+      errors.add(:delivery_date, "は 3営業日（営業日: 月-金）から14営業日までです。")
+    end
   end
 
   def get_delivery_date_list
