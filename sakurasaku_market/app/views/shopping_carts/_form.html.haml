@@ -24,20 +24,42 @@
   .actions
     = f.submit 'カート情報の保存'
 
-%ul.shopping_cart_item_index
-  - @shopping_cart.shopping_cart_items.each do |shopping_cart_item|
-    - commodity = shopping_cart_item.commodity
-    %li{class: "shopping_cart_item_#{shopping_cart_item.id}"}
-      %p
-        商品名:
-        = link_to commodity.name, commodity
-        - if commodity.file
-          = attachment_image_tag commodity, :file, :fill, 100, 75, format: 'jpeg'
-        - else
-          = image_tag '', size: '100x75'
-      %p
-        価格:
-        =  "#{commodity.price}円"
-      = link_to 'カートから削除する', user_commodity_shopping_cart_item_path(current_user, commodity), method: :delete, data: { confirm: 'Are you sure?' }
+%div.bill
+  %table
+    %thead
+      %tr
+        %th 小計
+        %th 送料
+        %th 代引き手数料
+        %th 税抜き
+        %th 税込み
+    - subtotal = @shopping_cart.get_shopping_cart_items_subtotal
+    - shipping_fee = @shopping_cart.get_shipping_fee
+    - cash_on_delivery_commission = ShoppingCart.get_cash_on_delivery_commission(subtotal)
+    - total = subtotal + shipping_fee + cash_on_delivery_commission
+    %tbody
+      %tr
+        %td= "#{subtotal}円"
+        %td= "#{shipping_fee}円"
+        %td= "#{cash_on_delivery_commission}円"
+        %td= "#{total}円"
+        %td= "#{ShoppingCart.get_tax_included_price(total)}円"
+
+%div
+  %ul.shopping_cart_item_index
+    - @shopping_cart.shopping_cart_items.each do |shopping_cart_item|
+      - commodity = shopping_cart_item.commodity
+      %li{class: "shopping_cart_item_#{shopping_cart_item.id}"}
+        %p
+          商品名:
+          = link_to commodity.name, commodity
+          - if commodity.file
+            = attachment_image_tag commodity, :file, :fill, 100, 75, format: 'jpeg'
+          - else
+            = image_tag '', size: '100x75'
+        %p
+          価格:
+          =  "#{commodity.price}円"
+        = link_to 'カートから削除する', user_commodity_shopping_cart_item_path(current_user, commodity), method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
