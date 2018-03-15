@@ -13,7 +13,10 @@
     = f.label "決済方法"
     = f.select :payment_method_type, ShoppingCart.payment_method_types.keys
   .field
-    = f.label "配送日"
+    = f.label "配送先"
+    = f.text_field :address, value: current_user.address
+  .field
+    = f.label "配送日(3営業日（営業日: 月-金）から14営業日まで)"
     = f.date_select :delivery_date
   .field
     = f.label "配送時間帯"

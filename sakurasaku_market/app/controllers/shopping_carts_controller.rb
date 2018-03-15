@@ -11,6 +11,7 @@ class ShoppingCartsController < ApplicationController
 
   def create
     @shopping_cart = current_user.build_shopping_cart(shopping_cart_params)
+    current_user.update(address: params[:shopping_cart][:address])
 
     respond_to do |format|
       if @shopping_cart.save
@@ -22,6 +23,7 @@ class ShoppingCartsController < ApplicationController
   end
 
   def update
+    current_user.update(address: params[:shopping_cart][:address])
     respond_to do |format|
       if @shopping_cart.update(shopping_cart_params)
         format.html { redirect_to edit_user_shopping_cart_path(current_user, current_user.shopping_cart), notice: 'Shopping cart was successfully updated.' }
