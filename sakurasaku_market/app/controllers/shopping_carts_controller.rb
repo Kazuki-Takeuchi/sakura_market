@@ -1,6 +1,6 @@
 class ShoppingCartsController < ApplicationController
   authorize_resource only: %i(new edit create update)
-  before_action :set_shopping_cart, only: [:edit, :update]
+  before_action :set_shopping_cart, only: [:edit, :update, :destroy]
 
   def new
     @shopping_cart = current_user.build_shopping_cart
@@ -30,6 +30,13 @@ class ShoppingCartsController < ApplicationController
       else
         format.html { render :edit }
       end
+    end
+  end
+
+  def destroy
+    @shopping_cart.destroy
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'Shopping cart item was successfully destroyed.' }
     end
   end
 

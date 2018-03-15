@@ -1,6 +1,9 @@
 %h1
   = current_user.name + " 様のショッピングカート"
 
+- if @shopping_cart.id
+  = link_to 'カートを削除する', user_shopping_cart_path(current_user, @shopping_cart), method: :delete, data: { confirm: 'Are you sure?' }
+
 = form_for [current_user, @shopping_cart] do |f|
   - if @shopping_cart.errors.any?
     #error_explanation
@@ -17,7 +20,7 @@
     = f.text_field :address, value: current_user.address
   .field
     = f.label "配送日(3営業日（営業日: 月-金）から14営業日まで)"
-    = f.date_select :delivery_date
+    = f.date_select :delivery_date, default: @shopping_cart.get_delivery_date_list.first
   .field
     = f.label "配送時間帯"
     = f.select :delivery_period_type, ShoppingCart.delivery_period_types.keys
