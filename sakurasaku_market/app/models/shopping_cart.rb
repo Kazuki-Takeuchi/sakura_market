@@ -37,6 +37,9 @@ class ShoppingCart < ApplicationRecord
   end
 
   def self.get_cash_on_delivery_commission(subtotal)
+    if subtotal == 0
+      return 0
+    end
     @@cash_on_delivery_commission_table.keys.each {|border|
       if border == :MAX
         return @@cash_on_delivery_commission_table[:MAX]
