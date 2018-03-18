@@ -40,7 +40,7 @@ class ShoppingCart < ApplicationRecord
       (date + i).next_day
     }.select {|date|
         date.wday != 0 && date.wday != 6
-      }.slice(2,13)
+      }.slice(2,12)
   end
 
   def self.get_cash_on_delivery_commission(subtotal)
