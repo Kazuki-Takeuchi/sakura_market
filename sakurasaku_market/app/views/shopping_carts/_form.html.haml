@@ -20,7 +20,7 @@
     = f.text_field :address, value: current_user.address
   .field
     = f.label "配送日(3営業日（営業日: 月-金）から14営業日まで)"
-    = f.date_select :delivery_date, default: @shopping_cart.get_delivery_date_list.first
+    = f.date_select :delivery_date, default: ShoppingCart.get_delivery_date_list(Date.today).first
   .field
     = f.label "配送時間帯"
     = f.select :delivery_period_type, ShoppingCart.delivery_period_types.keys
@@ -33,7 +33,7 @@
       %tr
         %th 小計
         %th 送料
-        %th 代引き手数料
+        %th 手数料
         %th 税抜き
         %th 税込み
     - subtotal = @shopping_cart.get_shopping_cart_items_subtotal

@@ -8,8 +8,11 @@ class ShoppingCart < ApplicationRecord
 
   # 代引き手数料 {上限,手数料}
   @@cash_on_delivery_commission_table = { 10000 => 300, 30000 => 400, 100000 => 600, MAX: 1000 }
+  # 1パッケージの送料
   @@unit_shipping_fee = 600
+  # 1パッケージの個数
   @@unit_shipping_fee_count = 5
+  # 消費税
   @@consumption_tax = 0.08
 
   def self.get_shopping_cart(user)
@@ -24,14 +27,17 @@ class ShoppingCart < ApplicationRecord
   end
 
   def check_delivery_date
-    unless self.get_delivery_date_list.include?(self.delivery_date.to_date)
+    if self.delivery_date.nil?
+      return true
+    end
+    unless ShoppingCart.get_delivery_date_list(Date.today).include?(self.delivery_date.to_date)
       errors.add(:delivery_date, "は 3営業日（営業日: 月-金）から14営業日までです。")
     end
   end
 
-  def get_delivery_date_list
+  def self.get_delivery_date_list(date)
     (0..30).map {|i|
-      (Date.today+i).next_day
+      (date + i).next_day
     }.select {|date|
         date.wday != 0 && date.wday != 6
       }.slice(2,13)
