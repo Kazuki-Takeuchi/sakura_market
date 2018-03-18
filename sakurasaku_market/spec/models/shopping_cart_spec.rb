@@ -5,18 +5,27 @@ RSpec.describe ShoppingCart, type: :model do
     it "2018/3/16 の指定可能配送日取得" do    
       delivery_date_list = ShoppingCart.get_delivery_date_list(Date.new(2018, 3,16))
       expect(delivery_date_list.count).to eq 12
+      expect(delivery_date_list.include?(Date.new(2018, 3,17))).to eq false # 土曜日
+      expect(delivery_date_list.include?(Date.new(2018, 3,18))).to eq false 
+      expect(delivery_date_list.include?(Date.new(2018, 3,19))).to eq false
+      expect(delivery_date_list.include?(Date.new(2018, 3,20))).to eq false
       expect(delivery_date_list[0]).to eq Date.new(2018, 3,21)
       expect(delivery_date_list[1]).to eq Date.new(2018, 3,22)
       expect(delivery_date_list[2]).to eq Date.new(2018, 3,23)
+      expect(delivery_date_list.include?(Date.new(2018, 3,24))).to eq false
+      expect(delivery_date_list.include?(Date.new(2018, 3,25))).to eq false
       expect(delivery_date_list[3]).to eq Date.new(2018, 3,26)
       expect(delivery_date_list[4]).to eq Date.new(2018, 3,27)
       expect(delivery_date_list[5]).to eq Date.new(2018, 3,28)
       expect(delivery_date_list[6]).to eq Date.new(2018, 3,29)
       expect(delivery_date_list[7]).to eq Date.new(2018, 3,30)
+      expect(delivery_date_list.include?(Date.new(2018, 3,31))).to eq false
+      expect(delivery_date_list.include?(Date.new(2018, 4,1))).to eq false
       expect(delivery_date_list[8]).to eq Date.new(2018, 4,2)
       expect(delivery_date_list[9]).to eq Date.new(2018, 4,3)
       expect(delivery_date_list[10]).to eq Date.new(2018, 4,4)
       expect(delivery_date_list[11]).to eq Date.new(2018, 4,5)
+      expect(delivery_date_list.include?(Date.new(2018, 4,6))).to eq false
     end
   end
 
@@ -93,8 +102,5 @@ RSpec.describe ShoppingCart, type: :model do
         expect(@shopping_cart.get_shipping_fee).to eq 1200
       end
     end
-    
-    
-  end
-  
+  end  
 end
