@@ -17,7 +17,7 @@ class ShoppingCartsController < ApplicationController
       if @shopping_cart.save
         format.html { redirect_to edit_user_shopping_cart_path(current_user, current_user.shopping_cart), notice: 'Shopping cart was successfully created.' }
       else
-        format.html { render :new }
+        format.html { redirect_to new_user_shopping_cart_path(current_user) }
       end
     end
   end
@@ -28,7 +28,7 @@ class ShoppingCartsController < ApplicationController
       if @shopping_cart.update(shopping_cart_params)
         format.html { redirect_to edit_user_shopping_cart_path(current_user, current_user.shopping_cart), notice: 'Shopping cart was successfully updated.' }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_user_shopping_cart_path(current_user, current_user.shopping_cart) }
       end
     end
   end
