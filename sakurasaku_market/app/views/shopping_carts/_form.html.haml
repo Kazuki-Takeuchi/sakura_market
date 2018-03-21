@@ -42,11 +42,11 @@
     - total = subtotal + shipping_fee + cash_on_delivery_commission
     %tbody
       %tr
-        %td= "#{subtotal}円"
-        %td= "#{shipping_fee}円"
-        %td= "#{cash_on_delivery_commission}円"
-        %td= "#{total}円"
-        %td= "#{ShoppingCart.get_tax_included_price(total)}円"
+        %td.subtotal= "#{subtotal}円"
+        %td.shopping_fee= "#{shipping_fee}円"
+        %td.cash_on_delivery_commission= "#{cash_on_delivery_commission}円"
+        %td.total= "#{total}円"
+        %td.tax_included_price= "#{ShoppingCart.get_tax_included_price(total)}円"
 
 %div
   %ul.shopping_cart_item_index
