@@ -5,10 +5,13 @@ Rails.application.routes.draw do
 
   resources :commodities
   resources :users, only: %i() do
-    resources :shopping_carts, only: %i(new edit create update destroy)
+    resources :shopping_carts, only: %i(new edit create update destroy) do
+      resources :shopping_histories, only: %i(create)
+    end
     # user が決まれば shopping_cart は決まるので url に shopping_cart 不要
     resources :commodities, only: %i() do
       resources :shopping_cart_items, only: %i(create destroy)
     end
+    resources :shopping_histories, only: %i(index show destroy)
   end
 end

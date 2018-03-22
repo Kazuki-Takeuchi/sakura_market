@@ -18,6 +18,8 @@
           = link_to 'ショッピングカート', new_user_shopping_cart_path(current_user)
         - else
           = link_to 'ショッピングカート', root_path
+        - if current_user
+          = link_to '購入履歴', user_shopping_histories_path(current_user)
         %span.login
           - if user_signed_in? 
             = link_to 'ログアウト', destroy_user_session_path, method: :delete

@@ -1,0 +1,44 @@
+%h1
+  = "#{current_user.name} 様 #{@shopping_history.updated_at} の購入履歴"
+
+%div.history
+  %table
+    %thead
+      %tr
+        %th 決済方法
+        %th 配送日
+        %th 配送配送時間帯
+        %th 小計
+        %th 送料
+        %th 手数料
+        %th 税抜
+        %th 税込
+        %th
+        %th
+
+    %tbody
+      %tr
+        %td= @shopping_history.payment_method_type
+        %td= @shopping_history.delivery_date.to_s(:date)
+        %td= @shopping_history.delivery_period_type
+        %td= "#{@shopping_history.subtotal}円"
+        %td= "#{@shopping_history.shipping_fee}円"
+        %td= "#{@shopping_history.cash_on_delivery_commission}円"
+        %td= "#{@shopping_history.subtotal+@shopping_history.shipping_fee+@shopping_history.cash_on_delivery_commission}円"
+        %td= "#{@shopping_history.tax_included_price}円"
+%br
+
+= link_to 'Back', user_shopping_histories_path(current_user)
+
+%div.history
+  %table.history
+    %thead
+      %tr
+        %th 商品名
+        %th 価格
+
+    %tbody
+      - @shopping_history.shopping_history_items.each do |shopping_history_item|
+        %tr
+          %td= shopping_history_item.name
+          %td= "#{shopping_history_item.price}円"

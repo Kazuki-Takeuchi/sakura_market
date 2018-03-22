@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313145544) do
+ActiveRecord::Schema.define(version: 20180321151045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,28 @@ ActiveRecord::Schema.define(version: 20180313145544) do
     t.integer "payment_method_type"
     t.datetime "delivery_date"
     t.integer "delivery_period_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shopping_histories", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "address"
+    t.integer "payment_method_type"
+    t.datetime "delivery_date"
+    t.integer "delivery_period_type"
+    t.integer "cash_on_delivery_commission"
+    t.integer "tax_included_price"
+    t.integer "subtotal"
+    t.integer "shipping_fee"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shopping_history_items", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.integer "shopping_history_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

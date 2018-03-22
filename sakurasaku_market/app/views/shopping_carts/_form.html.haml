@@ -1,5 +1,5 @@
 %h1
-  = current_user.name + " 様のショッピングカート"
+  = "#{current_user.name} 様のショッピングカート"
 
 - if @shopping_cart.id
   = link_to 'カートを削除する', user_shopping_cart_path(current_user, @shopping_cart), method: :delete, data: { confirm: 'Are you sure?' }
@@ -47,6 +47,10 @@
         %td.cash_on_delivery_commission= "#{cash_on_delivery_commission}円"
         %td.total= "#{total}円"
         %td.tax_included_price= "#{ShoppingCart.get_tax_included_price(total)}円"
+
+%div.buy
+  - if @shopping_cart.id && !@shopping_cart.shopping_cart_items.empty?
+    = link_to ' 購入する', user_shopping_cart_shopping_histories_path(current_user, @shopping_cart), method: :post, data: { confirm: 'Are you sure?' }
 
 %div
   %ul.shopping_cart_item_index

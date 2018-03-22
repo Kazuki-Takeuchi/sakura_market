@@ -1,0 +1,35 @@
+%h1
+  = "#{current_user.name} 様の購入履歴"
+
+%div.history
+  - if @shopping_histories.empty?
+    購入履歴はありません。
+  - else
+    %table.history
+      %thead
+        %tr
+          %th 決済方法
+          %th 配送日
+          %th 配送時間帯
+          %th 小計
+          %th 送料
+          %th 手数料
+          %th 税抜
+          %th 税込
+          %th
+          %th
+          %th
+
+      %tbody
+        - @shopping_histories.each do |shopping_history|
+          %tr
+            %td= shopping_history.payment_method_type
+            %td= shopping_history.delivery_date.to_s(:date)
+            %td= shopping_history.delivery_period_type
+            %td= "#{shopping_history.subtotal}円"
+            %td= "#{shopping_history.shipping_fee}円"
+            %td= "#{shopping_history.cash_on_delivery_commission}円"
+            %td= "#{shopping_history.subtotal+shopping_history.shipping_fee+shopping_history.cash_on_delivery_commission}円"
+            %td= "#{shopping_history.tax_included_price}円"
+            %td= link_to '詳細', user_shopping_history_path(current_user, shopping_history)
+            %td= link_to '削除', user_shopping_history_path(current_user, shopping_history), method: :delete, data: { confirm: 'Are you sure?' }

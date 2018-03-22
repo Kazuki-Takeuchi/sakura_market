@@ -8,6 +8,7 @@ class Ability
     elsif user
       can %i(new edit create update destroy), ShoppingCart
       can %i(create destroy), ShoppingCartItem
+      can %i(index show create destroy), ShoppingHistory
     end
     can %i(read), Commodity
   end

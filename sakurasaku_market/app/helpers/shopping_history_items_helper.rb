@@ -1,0 +1,2 @@
+module ShoppingHistoryItemsHelper
+end
