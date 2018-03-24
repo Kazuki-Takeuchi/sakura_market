@@ -8,6 +8,7 @@
     %table.history
       %thead
         %tr
+          %th 購入日
           %th 決済方法
           %th 配送日
           %th 配送時間帯
@@ -23,6 +24,7 @@
       %tbody
         - @shopping_histories.each do |shopping_history|
           %tr
+            %td= shopping_history.created_at
             %td= shopping_history.payment_method_type
             %td= shopping_history.delivery_date.to_s(:date)
             %td= shopping_history.delivery_period_type
@@ -33,3 +35,4 @@
             %td= "#{shopping_history.tax_included_price}円"
             %td= link_to '詳細', user_shopping_history_path(current_user, shopping_history)
             %td= link_to '削除', user_shopping_history_path(current_user, shopping_history), method: :delete, data: { confirm: 'Are you sure?' }
+    =paginate(@shopping_histories)

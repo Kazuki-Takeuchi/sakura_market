@@ -1,3 +1,5 @@
+%div
+  =paginate(@commodities)
 %ul.commodity_index
   - @commodities.sort {|a, b| a.display_index <=> b.display_index }.each do |commodity|
     - if commodity.display_flag

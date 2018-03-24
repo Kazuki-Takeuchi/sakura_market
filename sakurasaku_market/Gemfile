@@ -22,6 +22,7 @@ gem 'cancancan'
 gem 'rails_admin'
 gem "refile", github: 'refile/refile', require: "refile/rails"
 gem "refile-mini_magick", github: 'refile/refile-mini_magick'
+gem 'kaminari'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

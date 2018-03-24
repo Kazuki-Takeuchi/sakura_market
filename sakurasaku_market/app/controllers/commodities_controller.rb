@@ -3,7 +3,7 @@ class CommoditiesController < ApplicationController
   before_action :set_commodity, only: [:show, :edit, :update, :destroy]
 
   def index
-    @commodities = Commodity.all
+    @commodities = Commodity.page(params[:page]).order("display_index")
   end
 
   def show
