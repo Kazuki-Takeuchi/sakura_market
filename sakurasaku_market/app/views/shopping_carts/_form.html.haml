@@ -49,8 +49,13 @@
         %td.tax_included_price= "#{ShoppingCart.get_tax_included_price(total)}円"
 
 %div.buy
-  - if @shopping_cart.id && !@shopping_cart.shopping_cart_items.empty?
+  - if can_buy? && has_shopping_item?
     = link_to ' 購入する', user_shopping_cart_shopping_histories_path(current_user, @shopping_cart), method: :post, data: { confirm: 'Are you sure?' }
+  - else
+    - if has_shopping_item?
+      カート情報を保存してください。
+    - else
+      カートに商品を追加してください。
 
 %div
   %ul.shopping_cart_item_index

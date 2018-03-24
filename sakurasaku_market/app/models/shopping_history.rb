@@ -1,7 +1,15 @@
 class ShoppingHistory < ApplicationRecord
   belongs_to :user
   has_many :shopping_history_items, dependent: :destroy
-
+  validates_presence_of :address
+  validates_presence_of :payment_method_type
+  validates_presence_of :delivery_date
+  validates_presence_of :delivery_period_type
+  validates_presence_of :subtotal
+  validates_presence_of :cash_on_delivery_commission
+  validates_presence_of :shipping_fee
+  validates_presence_of :tax_included_price
+  
   enum payment_method_type: { 代引き: 1 }
   enum delivery_period_type: { "8-12":1, "12-14":2, "14-16":3, "16-18":4, "18-20":5, "20-21":6 }
 
