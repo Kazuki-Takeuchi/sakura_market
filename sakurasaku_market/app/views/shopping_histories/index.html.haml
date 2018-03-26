@@ -23,16 +23,16 @@
 
       %tbody
         - @shopping_histories.each do |shopping_history|
-          %tr
-            %td= shopping_history.created_at
-            %td= shopping_history.payment_method_type
-            %td= shopping_history.delivery_date.to_s(:date)
-            %td= shopping_history.delivery_period_type
-            %td= "#{shopping_history.subtotal}円"
-            %td= "#{shopping_history.shipping_fee}円"
-            %td= "#{shopping_history.cash_on_delivery_commission}円"
-            %td= "#{shopping_history.subtotal+shopping_history.shipping_fee+shopping_history.cash_on_delivery_commission}円"
-            %td= "#{shopping_history.tax_included_price}円"
+          %tr{:class => "shopping_history_#{shopping_history.id}"}
+            %td.created_at= shopping_history.created_at
+            %td.payment_method_type= shopping_history.payment_method_type
+            %td.delivery_date= shopping_history.delivery_date.to_s(:date)
+            %td.delivery_period_type= shopping_history.delivery_period_type
+            %td.subtotal= "#{shopping_history.subtotal}円"
+            %td.shipping_fee= "#{shopping_history.shipping_fee}円"
+            %td.cash_on_delivery_commission= "#{shopping_history.cash_on_delivery_commission}円"
+            %td.total= "#{shopping_history.subtotal+shopping_history.shipping_fee+shopping_history.cash_on_delivery_commission}円"
+            %td.tax_included_price= "#{shopping_history.tax_included_price}円"
             %td= link_to '詳細', user_shopping_history_path(current_user, shopping_history)
             %td= link_to '削除', user_shopping_history_path(current_user, shopping_history), method: :delete, data: { confirm: 'Are you sure?' }
     =paginate(@shopping_histories)

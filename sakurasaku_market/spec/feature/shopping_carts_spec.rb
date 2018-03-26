@@ -36,6 +36,8 @@ feature 'ショッピングカート' do
     click_on 'ショッピングカート'
     expect(current_path).to eq new_user_shopping_cart_path(login_user)
 
+    expect(has_link?('購入する')).to be false
+
     #入らない fill_in 'shopping_cart_address', with: '配送先'
     #save_and_open_page
     click_on 'カート情報の保存'
