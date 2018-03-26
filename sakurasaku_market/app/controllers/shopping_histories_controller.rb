@@ -1,6 +1,6 @@
 class ShoppingHistoriesController < ApplicationController
   authorize_resource only: %i(index show create destroy)
-  before_action :set_shopping_history, only: [:show, :edit, :update, :destroy]
+  before_action :set_shopping_history, only: [:show, :destroy]
 
   def index
     @shopping_histories = current_user.shopping_histories.page(params[:page]).order("created_at")
