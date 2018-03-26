@@ -57,8 +57,9 @@ feature '商品画面' do
     expect(has_link?('さくらんぼ')).to be true
     expect(has_no_link?('パイナップル')).to be true
 
+    #save_and_open_page
     ichigo = Commodity.find_by(name: 'いちご')
-    within '.commodity' + ichigo.id.to_s do
+    within '.commodity_' + ichigo.id.to_s do
       expect(has_no_link?('編集')).to be true
       expect(has_no_link?('削除')).to be true
     end
@@ -85,7 +86,7 @@ feature '商品画面' do
 
     #save_and_open_page
     sakuranbo = Commodity.find_by(name: 'さくらんぼ')
-    within '.commodity' + sakuranbo.id.to_s do
+    within '.commodity_' + sakuranbo.id.to_s do
       expect(has_link?('編集')).to be true
       expect(has_link?('削除')).to be true
     end
@@ -108,7 +109,7 @@ feature '商品画面' do
 
     expect(has_link?('いちご')).to be true
     ichigo = Commodity.find_by(name: 'いちご')
-    within '.commodity' + ichigo.id.to_s do
+    within '.commodity_' + ichigo.id.to_s do
       expect(has_link?('削除')).to be true
       click_on '削除'
     end
@@ -148,7 +149,7 @@ feature '商品画面' do
 
     expect(has_link?('さくらんぼ')).to be true
     sakuranbo = Commodity.find_by(name: 'さくらんぼ')
-    within '.commodity' + sakuranbo.id.to_s do
+    within '.commodity_' + sakuranbo.id.to_s do
       click_on '編集'
     end
     fill_in 'commodity_name', with: 'レモン'
